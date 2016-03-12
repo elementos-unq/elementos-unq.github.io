@@ -1,0 +1,78 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="editor.css">
+    <script src="editor.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="left">
+      <span class="label">Ejemplo actual: <span class="name">Ejemplo de página completa</span></span>
+    
+    </div>
+    <div class="right">
+      
+    </div>
+  </div>
+  <div class="controls">
+    <a class="control orange" onclick="process_content()">Mostrar</a>
+    <a class="control pink" href="../templates/complete.html" target="_blank">Abrir ejemplo original</a>
+    <a class="control teal" href="comments.html">Siguiente ejemplo</a>
+  </div>
+  
+  <div class="contents-wrapper">
+    <div class="input-wrapper">
+      <textarea id="currentExample"><html>
+  <!--
+    Descripcion:
+    Este ejemplo muestra varias estiquetas usadas en conjunto
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <meta name="keywords" content="UNQ, Unqui, informatica, programación">
+    <meta name="author" content="Equipo de diseñadores web">
+    <meta name="description" content="Aplicación de ejemplos de HTML">
+  </head>
+  <body><!--Este es solamente el cuerpo del código-->
+    <h1>Este es un título tamaño h1</h1>
+    <!--Voy a comenzar a separar el texto en párrafos.-->
+    <p>Aquí coloqué &amp;ltp&amp;gt para indicar que comienza un nuevo 
+      párrafo con un espacio de separación 
+      con respecto al anterior.
+    </p>
+    <p>Este nuevo párrafo tiene ciertas
+      <em>palabras</em> remarcadas de 
+      <strong>diferentes maneras</strong>.
+    </p>
+    <h3>Y finalmente coloco otro título, pero en
+    tamaño h3.</h3>
+  </body><!--Aquí termina el cuerpo-->
+</html></textarea>
+    </div>
+    <div class="output-wrapper">
+      <div id="shadow"></div>
+      <div id="contentOutput"><html>
+  <!--
+    Descripcion:
+    Las etiquetas <H1>,<H2>...<H6> proveen un estilo predeterminado al texto.
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <meta name="keywords" content="UNQ, Unqui, informatica, programación">
+    <meta name="author" content="Equipo de diseñadores web">
+    <meta name="description" content="Aplicación de ejemplos de HTML">
+  </head>
+  <body>
+    <h1>Encabezado h1</h1> <br/>
+    <h2>Encabezado h2</h2> <br/>
+    <h3>Encabezado h3</h3> <br/>
+    <h4>Encabezado h4</h4> <br/>
+    <h5>Encabezado h5</h5> <br/>
+    <h6>Encabezado h6</h6> <br/>
+  </body>
+</html></div>
+    </div>
+  </div>
+</body>
+  
+</html>

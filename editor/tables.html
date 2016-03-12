@@ -1,0 +1,93 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="editor.css">
+    <script src="editor.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="left">
+      <span class="label">Ejemplo actual: <span class="name">Tablas</span></span>
+    
+    </div>
+    <div class="right">
+      
+    </div>
+  </div>
+  <div class="controls">
+    <a class="control orange" onclick="process_content()">Mostrar</a>
+    <a class="control pink" href="../templates/tables.html" target="_blank">Abrir ejemplo original</a>
+    <a class="control teal" href="undefined.html">Siguiente ejemplo</a>
+  </div>
+  
+  <div class="contents-wrapper">
+    <div class="input-wrapper">
+      <textarea id="currentExample"><html>
+  <!--
+    Descripcion:
+    El navegador provee un conjunto de etiquetas para darle formato a las tablas.
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <meta name="keywords" content="UNQ, Unqui, informatica, programación">
+    <meta name="description" content="Aplicación de ejemplos de HTML">
+  </head>
+  <body>
+    
+    <table border="2"> <!--le agregamos un borde a la tabla-->
+    <caption>Titulo de la tabla</caption>
+    <tr><!-- primer fila-->
+      <td>Encabezado columna 1</td>
+      <td>Encabezado columna 2</td>
+      <td>Encabezado columna 3</td>
+    </tr>
+    <tr><!-- primer fila-->
+      <td>Fila 1 Columna 1</td>
+      <td>Fila 1 Columna 2</td>
+      <td>Fila 1 Columna 3</td>
+    </tr>
+    <tr><!-- segunda fila-->
+      <td>Fila 2 Columna 1</td>
+      <td>Fila 2 Columna 2</td>
+      <td>Fila 2 Columna 3</td>
+    </tr>
+    </table>
+  </body>
+</html></textarea>
+    </div>
+    <div class="output-wrapper">
+      <div id="shadow"></div>
+      <div id="contentOutput"><html>
+  <!--
+    Descripcion:
+    El navegador puede mostrar un conjunto de elementos con un formato de lista.
+    Existen dos tipos de listas:
+    Ordenadas: se muestran con numeros
+    No-ordenadas: se muestran con puntos
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <meta name="keywords" content="UNQ, Unqui, informatica, programación">
+    <meta name="description" content="Aplicación de ejemplos de HTML">
+  </head>
+  <body>
+    <!-- lista ordenada-->
+    <ol>Este es el ranking de carreras en las que estuve interesado:
+      <li>Ciencias Veterinarias</li>
+      <li>Medicina</li>
+      <li>Ingenier&iacutea Agr&iacutecola</li>
+    </ol>
+    <!-- lista no-ordenada-->
+    <ul>Hay muchas cosas que me gusta hacer en mi tiempo libre, como las siguientes:
+      <li>Caminar por el parque m&aacutes cercano a mi casa</li>
+      <li>Charlar con mis amigos sobre todos los temas, ¡menos el
+      estudio!</li>
+      <li>Jugar partidos de f&uacutetbol</li>
+    </ul>
+  </body>
+</html></div>
+    </div>
+  </div>
+</body>
+  
+</html>

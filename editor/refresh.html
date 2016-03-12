@@ -1,0 +1,76 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="editor.css">
+    <script src="editor.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="left">
+      <span class="label">Ejemplo actual: <span class="name">Http-equiv</span></span>
+    
+    </div>
+    <div class="right">
+      
+    </div>
+  </div>
+  <div class="controls">
+    <a class="control orange" onclick="process_content()">Mostrar</a>
+    <a class="control pink" href="../templates/refresh.html" target="_blank">Abrir ejemplo original</a>
+    <a class="control teal" href="refresh2.html">Siguiente ejemplo</a>
+  </div>
+  
+  <div class="contents-wrapper">
+    <div class="input-wrapper">
+      <textarea id="currentExample"><html>
+  <!--
+    Descripcion:
+    El attributo 'http-equiv' de la etiqueta <title> 
+      permite especificar acciones que el navegador puede procesar.
+    La acción Refresh actualiza la página cada una determinada 
+      cantidad de segundos.
+    Se recomienda abrir el ejemplo en una nueva pestaña
+      para poder vidualizar el texto
+  -->
+  <head>
+    <script>"texto que no se visualiza en la página.";</script>
+    <script>"texto que tampoco se visualiza en la página.";</script>
+    <title>Elementos de Programación y Lógica</title>
+    <meta name="keywords" content="UNQ, Unqui, informatica, programación">
+    <meta name="author" content="Equipo de diseñadores web">
+    <meta name="description" content="Aplicación de ejemplos de HTML">
+    <meta http-equiv="Refresh" content="2">
+  </head>
+  <body>
+    <p>Este texto si se puede ver<p>
+  </body>
+</html></textarea>
+    </div>
+    <div class="output-wrapper">
+      <div id="shadow"></div>
+      <div id="contentOutput"><html>
+  <!--
+    Descripcion:
+    La etiqueta <meta> sirve para especificar propiedades del documento.
+    Estas son útiles para el navegador e incluso para aplicaciones externas
+      como motores de busqueda.
+    El usuario no visualiza los contenidos de la misma.
+    Estos son ejemplos usados frecuentemente.
+  -->
+  <head>
+    <script>"texto que no se visualiza en la página.";</script>
+    <script>"texto que tampoco se visualiza en la página.";</script>
+    <title>Elementos de Programación y Lógica</title>
+    <meta name="keywords" content="UNQ, Unqui, informatica, programación">
+    <meta name="author" content="Equipo de diseñadores web">
+    <meta name="description" content="Aplicación de ejemplos de HTML">
+  </head>
+  <body>
+    <p>Este texto si se puede ver<p>
+  </body>
+</html></div>
+    </div>
+  </div>
+</body>
+  
+</html>

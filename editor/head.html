@@ -1,0 +1,48 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="editor.css">
+    <script src="editor.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="left">
+      <span class="label">Ejemplo actual: <span class="name">Head</span></span>
+    
+    </div>
+    <div class="right">
+      
+    </div>
+  </div>
+  <div class="controls">
+    <a class="control orange" onclick="process_content()">Mostrar</a>
+    <a class="control pink" href="../templates/head.html" target="_blank">Abrir ejemplo original</a>
+    <a class="control teal" href="title.html">Siguiente ejemplo</a>
+  </div>
+  
+  <div class="contents-wrapper">
+    <div class="input-wrapper">
+      <textarea id="currentExample"><html>
+  <!--
+    Descripcion:
+    La etiqueta <head> sirve para poner informacion util para el navegador.
+    El usuario no visualiza los contenidos de la misma.
+    Se recomienda abrir el ejemplo en una nueva pestaña para 
+  -->
+  <head>
+    <script>"texto que no se visualiza en la página.";</script>
+    <script>"texto que tampoco se visualiza en la página.";</script>
+  </head>
+  <body>
+    <p>Este texto si se puede ver<p>
+  </body>
+</html></textarea>
+    </div>
+    <div class="output-wrapper">
+      <div id="shadow"></div>
+      <div id="contentOutput"></div>
+    </div>
+  </div>
+</body>
+  
+</html>

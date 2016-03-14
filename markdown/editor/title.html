@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="editor.css">
+    <link rel="stylesheet" type="text/css" href="../assets/bootstrap.min.css">
+    <script src="editor.js"></script>
+    <script src="../assets/remarkable.min.js"></script>
+  </head>
+  
+  <body>
+    <div class="header">
+      <div class="left">
+        <span class="label">Ejemplo actual: <span class="name">Titulos</span></span>
+      
+      </div>
+      <div class="right">
+        
+      </div>
+    </div>
+    <div class="controls">
+      <a class="control orange" onclick="process_content()">Mostrar</a>
+      <a class="control amber " href="styles.html">Siguiente ejemplo</a>
+    </div>
+    
+    <div class="contents-wrapper">
+      <div class="input-wrapper">
+        <textarea id="currentExample"># Encabezado
+
+## Título
+
+### Subtítulo
+
+texto sin resaltar
+</textarea>
+      </div>
+      <div class="previous-wrapper">
+        <textarea id="previousExample"></textarea>
+      </div>
+      <div class="output-wrapper">
+        <div id="shadow"></div>
+        <div id="contentOutput"></div>
+      </div>
+    </div>
+  </body>
+  
+</html>

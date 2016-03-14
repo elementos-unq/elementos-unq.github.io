@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #3e464c;
+  float: left;
+  width: 100%;
+  height: 10vh;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.header .label {
+  box-sizing: initial;
+  color: #7986cb;
+}
+.header .label .name {
+  color: #dce775;
+}
+
+.controls {
+  background-color: #2856b6;
+  float: left;
+  width: 100%;
+  height: 5vh;
+}
+.controls .control {
+  float: left;
+  width: 20%;
+  height: 5vh;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #FFF;
+  line-height: 5vh;
+  transition: all 70ms ease;
+  cursor: pointer;
+}
+.controls .control.red {
+  background-color: #f44336;
+}
+.controls .control.blue {
+  background-color: blue;
+}
+.controls .control.lgreen {
+  background-color: #8bc34a;
+}
+.controls .control.purple {
+  background-color: #9c27b0;
+}
+.controls .control.pink {
+  background-color: #e91e63;
+}
+.controls .control.indigo {
+  background-color: #3f51b5;
+}
+.controls .control.orange {
+  background-color: #ff5722;
+}
+.controls .control.teal {
+  background-color: #009688;
+}
+.controls .control.amber {
+  background-color: #ffc107;
+  color: #555;
+}
+.controls .control.last-template {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
+.controls .control:hover {
+  z-index: 999;
+  transform: scale(1.1, 1.2);
+}
+
+.contents-wrapper {
+  background-color: #3e464c;
+  width: 100%;
+  height: 85vh;
+}
+.contents-wrapper .input-wrapper,
+.contents-wrapper .output-wrapper {
+  width: 50%;
+}
+.contents-wrapper .input-wrapper {
+  float: left;
+}
+.contents-wrapper .input-wrapper #currentExample {
+  width: 100%;
+  min-height: 85vh;
+}
+.contents-wrapper .previous-wrapper {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.contents-wrapper .output-wrapper {
+  position: relative;
+  float: right;
+  padding-left: 5px;
+  background-color: #666;
+  box-sizing: border-box;
+}
+.contents-wrapper .output-wrapper #contentOutput {
+  box-sizing: border-box;
+  padding: 10px;
+  overflow: hidden;
+  background-color: #FFF;
+  min-height: 85vh;
+  width: 100%;
+}
+.contents-wrapper .output-wrapper #shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85vh;
+  background-color: #333;
+  opacity: 0.5;
+}
+.contents-wrapper .output-wrapper #shadow.remove {
+  width: 0;
+  height: 0;
+}

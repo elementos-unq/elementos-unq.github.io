@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e91e63;
+}
+
+.header {
+  background-color: #3e464c;
+  float: left;
+  width: 100%;
+  height: 10vh;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.header .label {
+  box-sizing: initial;
+  color: #7986cb;
+}
+.header .label .name {
+  color: #dce775;
+}
+
+.start {
+  width: 20%;
+  height: 10vh;
+  display: inline-block;
+  text-decoration: none;
+  padding: 0;
+  margin: 40vh 40% 0 40%;
+  text-align: center;
+  color: #FFF;
+  line-height: 10vh;
+  transition: all 200ms ease;
+  cursor: pointer;
+  background-color: #ffc107;
+}
+.start:hover {
+  transform: scale(1.1, 1.2);
+}

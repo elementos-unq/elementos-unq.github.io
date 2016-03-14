@@ -1,0 +1,97 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="editor.css">
+    <script src="editor.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="left">
+      <span class="label">Ejemplo actual: <span class="name">Selectores CSS (multiples)</span></span>
+    
+    </div>
+    <div class="right">
+      <a class="css-link" href="css-css.html">CSS</a>
+    </div>
+  </div>
+  <div class="controls">
+    <a class="control orange" onclick="process_content()">Mostrar</a>
+    <a class="control pink" href="../templates/css-selectors2.html" target="_blank">Abrir ejemplo original</a>
+    <a class="control teal " href="css-layout.html">Siguiente ejemplo</a>
+  </div>
+  
+  <div class="contents-wrapper">
+    <div class="input-wrapper">
+      <textarea id="currentExample"><html>
+  <!--
+    Descripcion:
+    Un selectores css puede especificar varias rutas simultaneamente.
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <style>
+      .green .grande{
+        color: green;
+        font-size: 30px;
+      }
+      .rojo.sombreado{
+        color: red;
+        background-color: grey;
+      }
+      .rojo.sombreado,
+      .green .grande{
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="green">
+      <p class="grande">Texto grande y verde</p>
+    </span>
+    <p class="grande green">Este texto no es verde ni grande</p>
+    <br/>
+    <p class="rojo sombreado">Este texto es rojo y sombreado</p>
+  </body>
+</html></textarea>
+    </div>
+    <div class="output-wrapper">
+      <div id="shadow"></div>
+      <div id="contentOutput"><html>
+  <!--
+    Descripcion:
+    Los selectores CSS compuestos permiten definir la 
+      ruta a uno o varios elementos de la página.
+    En el caso de un conflicto entre dos selectores 
+      con los mismos atributos, se aplica el último declarado.
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <style>
+      .green .grande{
+        color: green;
+        font-size: 30px;
+      }
+      .rojo.sombreado{
+        color: red;
+        background-color: grey;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="green">
+      <p class="grande">Texto grande y verde</p>
+    </span>
+    <p class="grande green">Este texto no es verde ni grande</p>
+    <br/>
+    <p class="rojo sombreado">Este texto es rojo y sombreado</p>
+    <span class="green">
+      <!--¿Porqué no se aplica la regla de color verde? -->
+      <p class="grande rojo sombreado">Texto rojo y sombreado, pero no grande</p>
+    </span>
+  </body>
+</html></div>
+    </div>
+  </div>
+</body>
+  
+</html>

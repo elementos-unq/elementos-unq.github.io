@@ -1,0 +1,87 @@
+<html>
+  <!--
+    Descripcion:
+    El sistema de disposición CSS nos permite armar
+      estructuras dentro de la página.
+    Esta estructura se denominada maqueta.
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <style>
+      .columna{
+        width: 20%;
+        float: left;
+        height: 300px;
+        background-color: #ffc107;
+      }
+      .principal{
+        float: left;
+        width: 80%;
+        height: 300px;
+      }
+      .principal > .arriba,
+      .principal > .al-medio,
+      .principal > .abajo{
+        height: 80px;
+        width: 90%;
+        padding: 10px 5%;
+      }
+      .principal > .arriba{
+        background-color: #9c27b0;
+      }
+      .principal > .al-medio{
+        background-color: #8bc34a;
+      }
+      .principal > .abajo{
+        background-color: #2856b6;
+      }
+      .principal > * > .izquierda,
+      .principal > * > .centro,
+      .principal > * > .derecha{
+        float: left;
+        height: 80px;
+        width: 33.3%;
+      }
+      .principal > * > .izquierda{
+        background-color: #e91e63;
+      }
+      .principal > * > .centro{
+        background-color: #009688;
+      }
+      .principal > * > .derecha{
+        background-color: #ff5722;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="columna">
+    </div>
+    <div class="principal">
+      <div class="arriba">
+        <div class="izquierda">
+        </div>
+        <div class="centro">
+        </div>
+        <div class="derecha">
+        </div>
+      </div>
+      <div class="al-medio">
+        <div class="izquierda">
+        </div>
+        <div class="centro">
+        </div>
+        <div class="derecha">
+        </div>
+      </div>
+      <div class="abajo">
+        <div class="izquierda">
+        </div>
+        <div class="centro">
+        </div>
+        <div class="derecha">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

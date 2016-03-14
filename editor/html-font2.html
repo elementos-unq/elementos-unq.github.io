@@ -1,0 +1,71 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="editor.css">
+    <script src="editor.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="left">
+      <span class="label">Ejemplo actual: <span class="name">Etiqueta font y sus atributos</span></span>
+    
+    </div>
+    <div class="right">
+      <a class="css-link" href="css-css.html">CSS</a>
+    </div>
+  </div>
+  <div class="controls">
+    <a class="control orange" onclick="process_content()">Mostrar</a>
+    <a class="control pink" href="../templates/html-font2.html" target="_blank">Abrir ejemplo original</a>
+    <a class="control teal " href="html-headers.html">Siguiente ejemplo</a>
+  </div>
+  
+  <div class="contents-wrapper">
+    <div class="input-wrapper">
+      <textarea id="currentExample"><html>
+  <!--
+    Descripcion:
+    La etiqueta <font> permite otorgar ciertos atributos a una parte del texto.
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <meta name="keywords" content="UNQ, Unqui, informatica, programación">
+    <meta name="author" content="Equipo de diseñadores web">
+    <meta name="description" content="Aplicación de ejemplos de HTML">
+  </head>
+  <body>
+    <FONT SIZE="5px">Texto de 5px</FONT> <br/>
+    <FONT SIZE="10px">Texto de 10px</FONT> <br/>
+    <FONT COLOR="red">Texto en rojo</FONT> <br/>
+  </body>
+</html></textarea>
+    </div>
+    <div class="output-wrapper">
+      <div id="shadow"></div>
+      <div id="contentOutput"><html>
+  <!--
+    Descripcion:
+    Algunas etiquetas permiten darle formate al texto dentro de la página.
+    La etiqueta <br/> sirve para generar un salto de linea.
+      <br/> termina con una barra 'slash' porque es una etiqueta cerrada 
+      'self closing tag'
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <meta name="keywords" content="UNQ, Unqui, informatica, programación">
+    <meta name="author" content="Equipo de diseñadores web">
+    <meta name="description" content="Aplicación de ejemplos de HTML">
+  </head>
+  <body>
+    <B>Negrita (Bold)</B> <br/>
+    <I>Cursiva (Italic)</I> <br/>
+    <EM>énfasis (Emphasis)</EM> <br/>
+    <STRONG>Gran énfasis (Strong)</STRONG> <br/>
+    <U>Subrayado (Underline)</U> <br/>
+  </body>
+</html></div>
+    </div>
+  </div>
+</body>
+  
+</html>

@@ -1,0 +1,34 @@
+<html>
+  <!--
+    Descripcion:
+    Los selectores CSS compuestos permiten definir la 
+      ruta a uno o varios elementos de la página.
+    En el caso de un conflicto entre dos selectores 
+      con los mismos atributos, se aplica el último declarado.
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <style>
+      .green .grande{
+        color: green;
+        font-size: 30px;
+      }
+      .rojo.sombreado{
+        color: red;
+        background-color: grey;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="green">
+      <p class="grande">Texto grande y verde</p>
+    </span>
+    <p class="grande green">Este texto no es verde ni grande</p>
+    <br/>
+    <p class="rojo sombreado">Este texto es rojo y sombreado</p>
+    <span class="green">
+      <!--¿Porqué no se aplica la regla de color verde? -->
+      <p class="grande rojo sombreado">Texto rojo y sombreado, pero no grande</p>
+    </span>
+  </body>
+</html>

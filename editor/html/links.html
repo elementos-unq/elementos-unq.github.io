@@ -1,0 +1,101 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="editor.css">
+    <script src="editor.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="left">
+      <span class="label">Ejemplo actual: <span class="name">Enlaces</span></span>
+    
+    </div>
+    <div class="right">
+      
+    </div>
+  </div>
+  <div class="controls">
+    <a class="control orange" onclick="process_content()">Mostrar</a>
+    <a class="control pink" href="../templates/html/links.html" target="_blank">Abrir ejemplo original</a>
+    <a class="control teal " href="html/images.html">Siguiente ejemplo</a>
+  </div>
+  
+  <div class="contents-wrapper">
+    <div class="input-wrapper">
+      <textarea id="currentExample"><html>
+  <!--
+    Descripcion:
+    Los enlaces permiten al usuario navegar con un simple click.
+    Poseen varios atributos.
+    href: especifica la url de destino, marca local, o protocolo externo
+    target: especifica la forma en la que el navegador debe efectuar el 
+      redirecionamiento
+    
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <meta name="keywords" content="UNQ, Unqui, informatica, programación">
+    <meta name="author" content="Equipo de diseñadores web">
+    <meta name="description" content="Aplicación de ejemplos de HTML">
+  </head>
+  <body>
+    <!--enlace relativo-->
+    <a href="../index.html">Inicio del sitio</a><br/>
+    <!--enlace absoluto-->
+    <a href="http://www.unq.edu.ar">UNQ</a><br/>
+    <!--enlace absoluto en nueva pestaña-->
+    <a href="http://www.unq.edu.ar" target="_blank">UNQ en nueva pestaña</a><br/>
+    <!--protocolo de correo-->
+    <a href="mailto:jose.perez@unq.edu.ar">Enviar correo</a><br/>
+    <a href="#nombre-de-mi-destino">Marca dentro de mi texto</a>
+    <!--
+      muchos saltos de linea para forzar 
+      la salida de pantalla de la marca de destino
+    -->
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <a name="nombre-de-mi-destino">destino</a>
+  </body>
+</html></textarea>
+    </div>
+    <div class="output-wrapper">
+      <div id="shadow"></div>
+      <div id="contentOutput"><html>
+  <!--
+    Descripcion:
+    Los comentarios sirven para dejar información relacionada con el 
+      desarrollo de la página
+    Este texto es un comentario.
+    En páginas extensas se pueden utilizar para identificar
+      la finalización de las etiquetas
+  -->
+  <head>
+    <title>Elementos de Programación y Lógica</title>
+    <meta name="keywords" content="UNQ, Unqui, informatica, programación">
+    <meta name="author" content="Equipo de diseñadores web">
+    <meta name="description" content="Aplicación de ejemplos de HTML">
+  </head>
+  <body>
+    <h1>Este es un título tamaño h1</h1>
+    <!--Se utiliza &amp; porque de lo contrario, el navegador procesa la etiqueta
+      y no se visualiza en la ventana de salida.
+    -->
+    <p>Aquí coloqué &amp;ltp&amp;gt para indicar que comienza un nuevo 
+      párrafo con un espacio de separación 
+      con respecto al anterior.
+    </p>
+    <p>Este nuevo párrafo tiene ciertas
+      <em>palabras</em> remarcadas de 
+      <strong>diferentes maneras</strong>.
+    </p><!--Aquí termina el segundo parrafo-->
+    <h3>Y finalmente coloco otro título, pero en
+    tamaño h3.</h3>
+  </body><!--Aquí termina el cuerpo-->
+</html></div>
+    </div>
+  </div>
+</body>
+  
+</html>

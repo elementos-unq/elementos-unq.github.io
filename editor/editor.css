@@ -12,12 +12,32 @@ body {
   padding: 10px;
   box-sizing: border-box;
 }
-.header .label {
+.header .left {
+  float: left;
+}
+.header .left .label {
   box-sizing: initial;
   color: #7986cb;
 }
-.header .label .name {
+.header .left .label .name {
   color: #FFF;
+}
+.header .right {
+  float: right;
+}
+.header .right .css-link {
+  float: right;
+  width: 100px;
+  height: 5vh;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #FFF;
+  line-height: 5vh;
+  transition: all 70ms ease;
+  cursor: pointer;
+  background-color: #8bc34a;
 }
 
 .controls {
@@ -67,6 +87,11 @@ body {
   background-color: #ffc107;
   color: #555;
 }
+.controls .control.last-template {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
 .controls .control:hover {
   z-index: 999;
   transform: scale(1.1, 1.2);
@@ -99,7 +124,8 @@ body {
   overflow: hidden;
   background-color: #FFF;
   min-height: 85vh;
-  box-sizing: initial;
+  padding: 10px;
+  box-sizing: border-box;
   width: 100%;
 }
 .contents-wrapper .output-wrapper #shadow {

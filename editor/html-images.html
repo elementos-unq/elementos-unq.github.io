@@ -1,28 +1,30 @@
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="editor.css">
-    <script src="editor.js"></script>
-</head>
-
-<body>
-  <div class="header">
-    <div class="left">
-      <span class="label">Ejemplo actual: <span class="name">Etiqueta img</span></span>
-    
-    </div>
-    <div class="right">
-      <a class="css-link" href="css-css.html">CSS</a>
-    </div>
-  </div>
-  <div class="controls">
-    <a class="control orange" onclick="process_content()">Mostrar</a>
-    <a class="control pink" href="../templates/html-images.html" target="_blank">Abrir ejemplo original</a>
-    <a class="control teal " href="html-imageslinks.html">Siguiente ejemplo</a>
-  </div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+      <link rel="stylesheet" type="text/css" href="editor.css">
+      <script src="editor.js"></script>
+  </head>
   
-  <div class="contents-wrapper">
-    <div class="input-wrapper">
-      <textarea id="currentExample"><html>
+  <body>
+    <div class="header">
+      <div class="left">
+        <span class="label">Ejemplo actual: <span class="name">Etiqueta img</span></span>
+      
+      </div>
+      <div class="right">
+        <a class="css-link" href="css-css.html">CSS</a>
+      </div>
+    </div>
+    <div class="controls">
+      <a class="control orange" onclick="process_content()">Mostrar</a>
+      <a class="control pink" href="../templates/html-images.html" target="_blank">Abrir ejemplo original</a>
+      <a class="control teal " href="html-imageslinks.html">Siguiente ejemplo</a>
+    </div>
+    
+    <div class="contents-wrapper">
+      <div class="input-wrapper">
+        <textarea id="currentExample"><html>
   <!--
     Descripcion:
     La etiqueta <img> permite inclustar una imagen en la página.
@@ -51,10 +53,10 @@
       width="100px"/><br/>
   </body>
 </html></textarea>
-    </div>
-    <div class="output-wrapper">
-      <div id="shadow"></div>
-      <div id="contentOutput"><html>
+      </div>
+      <div class="output-wrapper">
+        <div id="shadow"></div>
+        <div id="contentOutput"><html>
   <!--
     Descripcion:
     Los enlaces permiten al usuario navegar con un simple click.
@@ -91,8 +93,8 @@
     <a name="nombre-de-mi-destino">destino</a>
   </body>
 </html></div>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
   
 </html>

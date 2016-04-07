@@ -1,13 +1,12 @@
 .intro { font-family:sans-serif; text-align:center; }
 .grid { margin:1em auto; border-collapse:collapse }
+
 .grid td {
     cursor:pointer;
     width:10px; height:10px;
     border:1px solid #ccc;
     text-align:center;
-    font-family:sans-serif; font-size:13px
 }
 .grid td.clicked {
     background-color:black;
-    font-weight:bold; color:red;
 }

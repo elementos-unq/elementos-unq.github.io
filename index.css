@@ -13,12 +13,33 @@ body {
   padding: 10px;
   box-sizing: border-box;
 }
-.header .label {
+
+.header .left {
+  float: left;
+}
+.header .left .label {
   box-sizing: initial;
   color: #7986cb;
 }
-.header .label .name {
+.header .left .label .name {
   color: #FFF;
+}
+.header .right {
+  float: right;
+}
+.header .right .tablero-link {
+  float: right;
+  width: 100px;
+  height: 5vh;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #FFF;
+  line-height: 5vh;
+  transition: all 70ms ease;
+  cursor: pointer;
+  background-color: DeepPink ;
 }
 
 .start {

@@ -7,6 +7,12 @@
     border:1px solid #ccc;
     text-align:center;
 }
-.grid td.clicked {
+.grid td.clicked_bla {
     background-color:black;
+}
+.grid td.clicked_red {
+    background-color:red;
+}
+.grid td.clicked_gre {
+    background-color:green;
 }

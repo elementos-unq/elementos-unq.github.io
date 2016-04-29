@@ -5,10 +5,19 @@ var grid = clickableGrid(30,30,function(el,row,col,i){
     console.log("You clicked on col:",col);
     console.log("You clicked on item #:",i);
 
-    if (el.className=='clicked') {
-        el.className='';
-    } else {
-        el.className='clicked';
+    switch (el.className){
+        case (''):
+            el.className='clicked_bla';
+            break;
+        case ('clicked_bla'):
+            el.className='clicked_red';
+            break;
+        case ('clicked_red'):
+            el.className='clicked_gre';
+            break;
+        case ('clicked_gre'):
+            el.className='';
+            break;
     }
     lastClicked = el;
 });

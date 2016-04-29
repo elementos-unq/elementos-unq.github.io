@@ -1,0 +1,60 @@
+.ast {
+  padding: 0px;
+  margin: 0px;
+}
+.ast .procedure > .signature > .name {
+  font-weight: bold;
+  color: #606;
+}
+.ast .procedure.active > .signature {
+  background: rgba(0, 0, 255, 0.3);
+}
+.ast .procedure.terminated > .block > .block-end {
+  background: rgba(0, 0, 255, 0.3);
+}
+.ast .block > .block-start,
+.ast .block > .block-end {
+  color: #066;
+}
+.ast .invocation > .name {
+  color: #606;
+}
+.ast .invocation > .arg-number {
+  color: #066;
+}
+.ast .invocation > .arg-identifier {
+  color: #080;
+}
+.ast .invocation.active {
+  background: rgba(0, 0, 255, 0.3);
+}
+.ast .conditional > .condition-row > .conditional-if,
+.ast .conditional > .condition-row > .conditional-then,
+.ast .conditional > .condition-row > .conditional-else {
+  color: #008;
+}
+.ast .conditional > .condition-row > .condition {
+  color: #080;
+}
+.ast .conditional.active > .condition-row {
+  background: rgba(0, 0, 255, 0.3);
+}
+.ast .conditional.terminated > .block > .block-end {
+  background: rgba(0, 0, 255, 0.3);
+}
+.ast .action .action-name {
+  color: #080;
+}
+.ast .action.active {
+  background: rgba(0, 0, 255, 0.3);
+}
+.ast .repeat.active .repeat-start {
+  background: rgba(0, 0, 255, 0.3);
+}
+.ast .repeat.terminated .end-row {
+  background: rgba(0, 0, 255, 0.3);
+}
+
+.number {
+  color: #066;
+}

@@ -1,0 +1,305 @@
+@charset "UTF-8";
+#execCode,
+#checkCode {
+  overflow: hidden;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.5s;
+  padding: 10px 32px;
+  width: 200px;
+}
+#execCode:focus,
+#checkCode:focus {
+  outline: none;
+}
+#execCode > span,
+#checkCode > span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+#execCode > span:after,
+#checkCode > span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+#execCode:hover > span,
+#checkCode:hover > span {
+  padding-right: 15px;
+}
+#execCode:hover > span:after,
+#checkCode:hover > span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#execCode {
+  opacity: 0;
+  width: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+.code-input,
+.code-preety,
+.code-iterator {
+  transition: all 0.5s;
+  position: relative;
+  padding-top: 5px;
+  box-sizing: border-box;
+  float: left;
+  white-space: nowrap;
+}
+
+.code-input {
+  padding-left: 5px;
+  padding-right: 2px;
+}
+
+.code-preety {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.code-iterator {
+  padding-left: 2px;
+  padding-right: 5px;
+}
+
+#codePreety,
+#iterator,
+#codeInput {
+  box-sizing: border-box;
+  width: 100%;
+  height: 85vh;
+  margin: 0px;
+}
+
+#codePreety,
+#codeInput {
+  padding: 5px;
+  white-space: pre;
+  word-wrap: normal;
+  overflow-x: scroll;
+}
+
+.force-vh-support #codePreety,
+.force-vh-support #iterator,
+.force-vh-support #codeInput {
+  height: 800px;
+}
+
+.code-preety,
+.code-iterator {
+  width: 6%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.code-input {
+  width: 88%;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+#codePreety,
+#iterator {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+#codeInput {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.pretty-mode .code-iterator,
+.pretty-mode .code-input {
+  width: 6%;
+}
+.pretty-mode .code-preety {
+  width: 88%;
+}
+.pretty-mode #codeInput,
+.pretty-mode #iterator {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.pretty-mode #codePreety {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+.pretty-mode #execCode {
+  opacity: 1;
+  padding: 10px 32px;
+  width: 200px;
+}
+
+.iterate-mode .code-input,
+.iterate-mode .code-preety {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.iterate-mode .code-input {
+  width: 6%;
+}
+.iterate-mode .code-preety {
+  width: 20%;
+}
+.iterate-mode .code-iterator {
+  width: 74%;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+.iterate-mode #codeInput,
+.iterate-mode #codePreety {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.pretty-mode #checkCode,
+.iterate-mode #checkCode {
+  opacity: 0;
+  width: 0px;
+  padding: 0px;
+}
+
+#codePreety {
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 1px solid #BBBBBB;
+  font-family: monospace;
+  padding: 5px;
+  box-sizing: border-box;
+  padding-right: 0px;
+}
+
+#iterator {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  font-family: monospace;
+  position: relative;
+}
+#iterator .controls {
+  float: left;
+  width: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 85vh;
+  background-color: #008080;
+}
+#iterator .controls .buttons {
+  width: 200px;
+}
+#iterator.processing .controls .buttons .btn {
+  background-color: #7CDF80;
+}
+#iterator.stopped .controls .buttons .btn.run,
+#iterator.stopped .controls .buttons .btn.step {
+  background-color: #7CDF80;
+}
+#iterator.error .controls {
+  background-color: #FF4500;
+}
+#iterator.error .controls .buttons .btn {
+  background-color: #DC143C;
+}
+#iterator #boardContainer {
+  box-sizing: border-box;
+  padding-left: 200px;
+  width: 100%;
+  height: 85vh;
+  background-color: #00CED1;
+}
+#iterator #boardContainer .board .row {
+  height: 30px;
+  float: left;
+  clear: left;
+}
+#iterator #boardContainer .board .row .cell {
+  box-sizing: content-box;
+  padding: 4px;
+  float: left;
+}
+#iterator #boardContainer .board .row .cell .content {
+  width: 20px;
+  height: 20px;
+  background-color: #FFFFFF;
+  border: 1px solid black;
+}
+#iterator #boardContainer .board .row .cell.current {
+  background-color: #3333FF;
+}
+#iterator #boardContainer .board .row .cell.black .content {
+  background-color: #000000;
+}
+#iterator #boardContainer .board .row .cell.red .content {
+  background-color: #f44336;
+}
+#iterator #boardContainer .board .row .cell.green .content {
+  background-color: #4caf50;
+}
+
+.btn.flow-control {
+  width: 20px;
+}
+
+.btn.resize {
+  margin-top: 10px;
+  width: 140px;
+}
+
+/* #### Mobile Phones Portrait #### */
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+  .code-preety #execCode,
+  .code-input #checkCode {
+    font-size: 10px;
+    width: 100px;
+    padding: 5px 16px;
+  }
+
+  #iterator .controls {
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 40vh;
+    background-color: #008080;
+  }
+  #iterator #boardContainer {
+    position: relative;
+    padding: 0;
+    clear: left;
+    float: left;
+    width: 100%;
+    height: 45vh;
+    background-color: #00CED1;
+  }
+}
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-device-width: 640px) and (orientation: landscape) {
+  .code-preety #execCode,
+  .code-input #checkCode {
+    font-size: 6px;
+    width: 60px;
+    padding: 3px 9.6px;
+  }
+}
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-device-width: 640px) {
+  /* some CSS here */
+}

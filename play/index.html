@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <script src="resources/script/promise.js"     type="text/javascript"></script>
+    <script src="resources/script/elementos.js"   type="text/javascript"></script>
+    <script src="resources/script/index.js"       type="text/javascript"></script>
+    <script src="resources/script/coder.js"       type="text/javascript"></script>
+    <script src="resources/script/board.js"       type="text/javascript"></script>
+    <script src="resources/script/exceptions.js"  type="text/javascript"></script>
+    <script src="resources/script/environment.js" type="text/javascript"></script>
+    <script src="resources/script/interpreter.js" type="text/javascript"></script>
+    <link  href="resources/style/general.css"     type="text/css" rel="stylesheet">
+    <link  href="resources/style/index.css"       type="text/css" rel="stylesheet">
+    <link  href="resources/style/coder.css"       type="text/css" rel="stylesheet">
+    <link  href="bower_components/components-font-awesome/css/font-awesome.css" type="text/css" rel="stylesheet">
+    <title>Iterador de interpretación</title>
+  </head>
+  <body>
+    <div class="header">
+      <span class="label">Elementos de programación y lógica<br/><span class="name">Iterador de interpretación</span></span>
+    </div>
+    <div class="code-input">
+      <button type="button" id="checkCode" onclick="fill_code()">
+        <span>Comprobar </span>
+      </button>
+      <textarea id="codeInput" onkeyup="save_code()" onfocus="input_mode()" ></textarea>
+    </div>
+    <div class="code-preety">
+      <button type="button" id="execCode" onclick="exec_code()">
+        <span>
+          <span id="action">Restante: </span>
+          <span id="timeout"></span>
+        </span>
+      </button>
+      <div id="codePreety" onclick="pretty_mode()"></div>
+    </div>
+    <div class="code-iterator">
+      <div id="iterator">
+        <div class="controls">
+          <div class="buttons">
+            <button type="button" class="btn flow-control reset" onclick="reset()">
+              <span><i class="fa fa-fast-backward"></i></span>
+            </button>
+            <button type="button" class="btn flow-control step" onclick="step()">
+              <span><i class="fa fa-step-forward"></i></span>
+            </button>
+            <button type="button" class="btn flow-control run" onclick="run()">
+              <span><i class="fa fa-play"></i></span>
+            </button>
+            <div class="input-wrapper">
+              <span class="input-label">Celdas por fila</span>
+              <input id="boardWidth"/>
+            </div>
+            <div class="input-wrapper">
+              <span class="input-label">Cantidad de filas</span>
+              <input id="boardHeight"/>
+            </div>
+            <button type="button" class="btn resize" onclick="resize()">
+              <span><i class="fa fa-crop"></i> Redimensionar</span>
+            </button>
+          </div>
+        </div>
+        <div id="boardContainer">
+        
+        
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

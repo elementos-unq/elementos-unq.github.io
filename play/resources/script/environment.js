@@ -18,44 +18,96 @@ environment = {};
       if (current.y > current.min_y) {
         current.y -= 1;
         board.set_current(current);
-        return true;
+        return {
+          error: false
+        };
       } else {
-        return false;
+        return {
+          error: true,
+          description: 'Fin del tablero al norte'
+        };
       }
     },
     MoverOeste: function() {
       if (current.x > current.min_x) {
         current.x -= 1;
         board.set_current(current);
-        return true;
+        return {
+          error: false
+        };
       } else {
-        return false;
+        return {
+          error: true,
+          description: 'Fin del tablero al Oeste'
+        };
       }
     },
     MoverSur: function() {
       if (current.y < current.max_y) {
         current.y += 1;
         board.set_current(current);
-        return true;
+        return {
+          error: false
+        };
       } else {
-        return false;
+        return {
+          error: true,
+          description: 'Fin del tablero al Sur'
+        };
       }
     },
     MoverEste: function() {
       if (current.x < current.max_x) {
         current.x += 1;
         board.set_current(current);
-        return true;
+        return {
+          error: false
+        };
       } else {
-        return false;
+        return {
+          error: true,
+          description: 'Fin del tablero al Este'
+        };
       }
     },
     PintarNegro: function() {
       board.PintarNegro();
-      return true;
+      return {
+        error: false
+      };
+    },
+    PintarVerde: function() {
+      board.PintarVerde();
+      return {
+        error: false
+      };
+    },
+    PintarRojo: function() {
+      board.PintarRojo();
+      return {
+        error: false
+      };
+    },
+    Despintar: function() {
+      board.Despintar();
+      return {
+        error: false
+      };
     }
   };
   conditions = {
+    estaPintado: function() {
+      return board.estaPintado();
+    },
+    estaPintadoDeNegro: function() {
+      return board.estaPintadoDeNegro();
+    },
+    estaPintadoDeVerde: function() {
+      return board.estaPintadoDeVerde();
+    },
+    estaPintadoDeRojo: function() {
+      return board.estaPintadoDeRojo();
+    },
     puedoMoverSur: function() {
       return current.y < current.max_y;
     },
@@ -77,10 +129,21 @@ environment = {};
   environment.effect = function(key) {
     var result;
     result = actions[key]();
-    return resolved(result);
+    return resolved(!result.error, result.description);
   };
   environment.view = board.view;
   board.resize(current);
+  environment.resize = function(w, h) {
+    current.max_y = h - 1;
+    current.max_x = h - 1;
+    if (current.x > current.max_x) {
+      current.x = current.max_x;
+    }
+    if (current.y > current.max_y) {
+      current.y = current.max_y;
+    }
+    return board.resize(current);
+  };
   environment.left = function() {
     return conditions.puedoMoverOeste() && actions.MoverOeste();
   };

@@ -6,6 +6,12 @@
   font-weight: bold;
   color: #606;
 }
+.ast .procedure > .signature > .param-name {
+  display: block-inline;
+}
+.ast .procedure > .signature > .param-name.active:hover {
+  background: rgba(63, 127, 63, 0.3);
+}
 .ast .procedure.active > .signature {
   background: rgba(0, 0, 255, 0.3);
 }
@@ -29,12 +35,17 @@
   background: rgba(0, 0, 255, 0.3);
 }
 .ast .conditional > .condition-row > .conditional-if,
-.ast .conditional > .condition-row > .conditional-then,
-.ast .conditional > .condition-row > .conditional-else {
+.ast .conditional > .condition-row > .conditional-then {
   color: #008;
+}
+.ast .conditional > .condition-row > .negation {
+  color: #066;
 }
 .ast .conditional > .condition-row > .condition {
   color: #080;
+}
+.ast .conditional > .conditional-else {
+  color: #008;
 }
 .ast .conditional.active > .condition-row {
   background: rgba(0, 0, 255, 0.3);

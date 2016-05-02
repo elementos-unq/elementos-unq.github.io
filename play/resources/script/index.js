@@ -11,12 +11,15 @@ save_code = function() {};
 fill_code = function() {};
 
 window.onload = function() {
-  var MODE, action_text, allow_execute_change, ast, asynk, boardContainer, countdown, error_change, execcode, fix_body_css, input, iterator, make_step, makeloop, makeloop_synk, output, pretty, processing_change, reset_count_down, scope, second_pass, stopped_change, storage_key, swap_state, time_left_change, timeout_text, vh_support;
+  var MODE, action_text, allow_execute_change, ast, asynk, boardContainer, board_height, board_width, countdown, error_change, error_text, execcode, fix_body_css, handle_key, input, iterator, makeloop, makeloop_synk, output, pretty, processing_change, reset_count_down, scope, second_pass, show_error, show_processing_change, stopped_change, storage_key, swap_state, time_left_change, timeout_text, vh_support;
   input = document.querySelector('#codeInput');
   output = document.querySelector('#codeOutput');
   pretty = document.querySelector('#codePreety');
   iterator = document.querySelector('#iterator');
+  board_width = iterator.querySelector('#boardWidth');
+  board_height = iterator.querySelector('#boardHeight');
   boardContainer = document.querySelector('#boardContainer');
+  error_text = document.querySelector('#error');
   execcode = document.querySelector('#execCode');
   action_text = execcode.querySelector('#action');
   timeout_text = execcode.querySelector('#timeout');
@@ -41,6 +44,15 @@ window.onload = function() {
       return iterator.classList.add(PROCESSING);
     } else {
       return iterator.classList.remove(PROCESSING);
+    }
+  };
+  show_processing_change = function() {
+    var SHOW_PROCESSING;
+    SHOW_PROCESSING = 'show-processing';
+    if (scope.show_processing) {
+      return iterator.classList.add(SHOW_PROCESSING);
+    } else {
+      return iterator.classList.remove(SHOW_PROCESSING);
     }
   };
   stopped_change = function() {
@@ -76,7 +88,7 @@ window.onload = function() {
     return countdown();
   };
   (function() {
-    var WAIT_TIME, allow_execute, has_error, processing, stopped, time_left;
+    var WAIT_TIME, allow_execute, has_error, processing, show_processing, stopped, time_left;
     processing = null;
     Object.defineProperty(scope, 'processing', {
       get: function() {
@@ -86,6 +98,18 @@ window.onload = function() {
         if (next !== processing) {
           processing = next;
           return processing_change();
+        }
+      }
+    });
+    show_processing = null;
+    Object.defineProperty(scope, 'show_processing', {
+      get: function() {
+        return show_processing;
+      },
+      set: function(next) {
+        if (next !== show_processing) {
+          show_processing = next;
+          return show_processing_change();
         }
       }
     });
@@ -113,7 +137,7 @@ window.onload = function() {
         }
       }
     });
-    WAIT_TIME = 10;
+    WAIT_TIME = 3;
     time_left = WAIT_TIME;
     allow_execute = false;
     Object.defineProperty(scope, 'time_left', {
@@ -209,12 +233,23 @@ window.onload = function() {
     return swap_state(MODE.PRETTY);
   };
   boardContainer.appendChild(environment.view);
+  show_error = function(error) {
+    error_text.innerHTML = error;
+    scope.error = true;
+    return scope.stopped = true;
+  };
   window.exec_code = function() {
+    var evnt;
     if (ast && scope.allow_execute) {
       scope.error = false;
       scope.stopped = false;
       swap_state(MODE.ITERATE);
-      interpreter.load(ast, environment);
+      try {
+        interpreter.load(ast, environment);
+      } catch (_error) {
+        evnt = _error;
+        show_error(evnt);
+      }
       reset_count_down();
     }
     return document.activeElement.blur();
@@ -223,7 +258,7 @@ window.onload = function() {
     return window.setTimeout(callback, 1);
   };
   window.step = function() {
-    if (!scope.processing) {
+    if (!(scope.processing || scope.error || (MODE.CURRENT !== MODE.ITERATE))) {
       scope.processing = true;
       return asynk(function() {
         return interpreter.step().success(function(end) {
@@ -231,20 +266,18 @@ window.onload = function() {
           if (end) {
             return scope.stopped = true;
           }
-        }).error(function(data) {
+        }).error(function(error) {
           scope.processing = false;
-          scope.stopped = true;
-          return scope.error = true;
+          return show_error(error);
         });
       });
     }
   };
   makeloop = function() {
     var on_error, on_success;
-    on_error = function() {
+    on_error = function(error) {
       scope.processing = false;
-      scope.stopped = true;
-      return scope.error = true;
+      return show_error(error);
     };
     on_success = function(end) {
       if (end) {
@@ -264,12 +297,13 @@ window.onload = function() {
     var on_error, on_success;
     on_error = function() {
       scope.processing = false;
-      scope.stopped = true;
-      return scope.error = true;
+      scope.show_processing = false;
+      return show_error(error);
     };
     on_success = function(end) {
       if (end) {
         scope.processing = false;
+        scope.show_processing = false;
         return scope.stopped = true;
       } else {
         return interpreter.step().success(on_success).error(on_error);
@@ -278,15 +312,16 @@ window.onload = function() {
     return interpreter.step().success(on_success).error(on_error);
   };
   window.run = function() {
-    if (!scope.processing) {
+    if (!(scope.processing || scope.error)) {
       scope.processing = true;
       return makeloop();
     }
   };
   window.run_all = function() {
-    if (!scope.processing) {
+    if (!(scope.processing || scope.error)) {
       scope.processing = true;
-      return makeloop_synk();
+      scope.show_processing = true;
+      return asynk(makeloop_synk);
     }
   };
   window.reset = function() {
@@ -299,6 +334,14 @@ window.onload = function() {
       return scope.processing = false;
     }
   };
+  window.resize = function() {
+    var h, h_val, w, w_val;
+    h_val = board_height.value;
+    w_val = board_width.value;
+    h = h_val && h_val > 0 ? h_val : 1;
+    w = w_val && w_val > 0 ? w_val : 1;
+    return environment.resize(w, h);
+  };
   window.input_mode = function() {
     interpreter.deactivate();
     return swap_state(MODE.INPUT);
@@ -309,7 +352,7 @@ window.onload = function() {
       return swap_state(MODE.PRETTY);
     }
   };
-  make_step = function(evnt) {
+  handle_key = function(evnt) {
     var keyCode;
     keyCode = evnt.keyCode;
     if (keyCode === 13) {
@@ -328,6 +371,6 @@ window.onload = function() {
       return environment.down();
     }
   };
-  document.addEventListener('keydown', make_step, false);
+  document.addEventListener('keydown', handle_key, false);
   return reset_count_down();
 };

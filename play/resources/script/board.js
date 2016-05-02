@@ -3,7 +3,7 @@ var board;
 board = {};
 
 (function() {
-  var COLOR, COLORS, add_classes, mk_div, paint, prop, rows, scope, switch_color;
+  var COLOR, COLORS, add_classes, isPaintedWith, mk_div, paint, prop, rows, scope, switch_color;
   COLOR = {
     BLACK: 'black',
     GREEN: 'green',
@@ -38,6 +38,9 @@ board = {};
     cell.color = color;
     return cell.color && cell.view.classList.add(cell.color);
   };
+  isPaintedWith = function(color) {
+    return scope.current.color === color;
+  };
   board.pintar = function(color) {
     return paint(scope.current, color);
   };
@@ -49,6 +52,21 @@ board = {};
   };
   board.PintarRojo = function() {
     return this.pintar(COLOR.RED);
+  };
+  board.Despintar = function() {
+    return this.pintar();
+  };
+  board.estaPintado = function() {
+    return !!scope.current.color;
+  };
+  board.estaPintadoDeNegro = function() {
+    return isPaintedWith(COLOR.BLACK);
+  };
+  board.estaPintadoDeVerde = function() {
+    return isPaintedWith(COLOR.GREEN);
+  };
+  board.estaPintadoDeRojo = function() {
+    return isPaintedWith(COLOR.RED);
   };
   scope = {};
   (function() {
@@ -95,9 +113,14 @@ board = {};
     };
   };
   return board.resize = function(config) {
-    var cell, col_index, content, row, row_index, _i, _ref, _ref1, _results;
+    var cell, col_index, content, row, row_index, _i, _j, _len, _ref, _ref1, _results;
+    for (_i = 0, _len = rows.length; _i < _len; _i++) {
+      row = rows[_i];
+      board.view.removeChild(row.view);
+    }
+    rows = [];
     _results = [];
-    for (row_index = _i = _ref = config.min_y, _ref1 = config.max_y; _ref <= _ref1 ? _i <= _ref1 : _i >= _ref1; row_index = _ref <= _ref1 ? ++_i : --_i) {
+    for (row_index = _j = _ref = config.min_y, _ref1 = config.max_y; _ref <= _ref1 ? _j <= _ref1 : _j >= _ref1; row_index = _ref <= _ref1 ? ++_j : --_j) {
       row = {
         view: mk_div(['row']),
         cells: []
@@ -106,9 +129,9 @@ board = {};
       board.view.appendChild(row.view);
       rows.push(row);
       _results.push((function() {
-        var _j, _ref2, _ref3, _results1;
+        var _k, _ref2, _ref3, _results1;
         _results1 = [];
-        for (col_index = _j = _ref2 = config.min_x, _ref3 = config.max_x; _ref2 <= _ref3 ? _j <= _ref3 : _j >= _ref3; col_index = _ref2 <= _ref3 ? ++_j : --_j) {
+        for (col_index = _k = _ref2 = config.min_x, _ref3 = config.max_x; _ref2 <= _ref3 ? _k <= _ref3 : _k >= _ref3; col_index = _ref2 <= _ref3 ? ++_k : --_k) {
           cell = {
             view: mk_div(['cell'])
           };

@@ -50,6 +50,12 @@
             <button type="button" class="btn flow-control run" onclick="run()">
               <span><i class="fa fa-play"></i></span>
             </button>
+            <button type="button" class="btn flow-control run-all" onclick="run_all()">
+              <span>
+                <i class="fa fa-fast-forward normal"></i>
+                <i class="fa fa-refresh fa-spin wating"></i>
+              </span>
+            </button>
             <div class="input-wrapper">
               <span class="input-label">Celdas por fila</span>
               <input id="boardWidth"/>
@@ -63,9 +69,9 @@
             </button>
           </div>
         </div>
+        <div id="error">
+        </div>
         <div id="boardContainer">
-        
-        
         </div>
       </div>
     </div>

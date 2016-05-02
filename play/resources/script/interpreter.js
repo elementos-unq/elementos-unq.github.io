@@ -3,7 +3,7 @@ var interpreter;
 interpreter = {};
 
 (function() {
-  var ACTIVE, TERMINATED, ast, context, environment, get_procedure, invocation, mkscope, root;
+  var ACTIVE, TERMINATED, ast, context, environment, eval_exp, get_procedure, invocation, not_defined, root;
   ast = null;
   environment = null;
   invocation = function(name) {
@@ -12,12 +12,7 @@ interpreter = {};
       name: name
     };
   };
-  mkscope = function(parent) {
-    var scope;
-    scope = {};
-    scope.__proto__ = parent;
-    return scope;
-  };
+  not_defined = {};
   root = function() {
     return {
       activate: function() {
@@ -26,8 +21,21 @@ interpreter = {};
       deactivate: function() {},
       step: function() {
         return resolved(true, true);
-      }
+      },
+      scope: {}
     };
+  };
+  eval_exp = function(exp, scope) {
+    switch (exp.TYPE) {
+      case 'IDENTIFIER':
+        return scope[exp.name];
+      case 'NUMERIC':
+        return parseInt(exp.value);
+      case 'ADD':
+        return eval_exp(exp.left, scope) + eval_exp(exp.right, scope);
+      case 'SUB':
+        return eval_exp(exp.left, scope) - eval_exp(exp.right, scope);
+    }
   };
   get_procedure = function(name) {
     var procedure, required, _i, _len;
@@ -52,6 +60,7 @@ interpreter = {};
   context = {
     BLOCK: function(statements, parent) {
       return {
+        scope: parent.scope,
         index: -1,
         activate: function() {
           this.index += 1;
@@ -70,11 +79,17 @@ interpreter = {};
           return parent.view.classList.remove(TERMINATED);
         },
         step: function() {
-          var creator, next;
+          var creator, evnt, next, next2;
           if (statements.length > this.index) {
             next = statements[this.index];
             creator = context[next.TYPE];
-            return context.set_current(creator(next, this));
+            try {
+              next2 = creator(next, this);
+            } catch (_error) {
+              evnt = _error;
+              return resolved(null, evnt.message);
+            }
+            return context.set_current(next2);
           } else {
             return context.set_current(parent);
           }
@@ -82,15 +97,57 @@ interpreter = {};
       };
     },
     INVOCATION: function(invocation, parent) {
-      var procedure;
+      var arg, procedure, scope, _i, _len, _ref;
       procedure = get_procedure(invocation.name);
+      scope = {};
+      _ref = invocation.args || [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        arg = _ref[_i];
+        scope[arg.name] = eval_exp(arg.value, parent.scope);
+      }
       return {
+        scope: scope,
         view: procedure.view,
+        deactive_params: function() {
+          var param_view, _j, _len1, _ref1, _results;
+          _ref1 = procedure.view.params;
+          _results = [];
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            param_view = _ref1[_j];
+            param_view.setAttribute('title', '');
+            _results.push(param_view.classList.remove(ACTIVE));
+          }
+          return _results;
+        },
         activate: function() {
+          var index, param_view, params_clone, _j, _k, _len1, _len2, _ref1, _ref2;
           if (!this.processed) {
             this.processed = true;
+            params_clone = procedure.params && procedure.params.slice() || [];
+            _ref1 = invocation.args || [];
+            for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+              arg = _ref1[_j];
+              index = params_clone.indexOf(arg.name);
+              if (index > -1) {
+                params_clone.splice(index, 1);
+              } else {
+                this.deactive_params();
+                return resolved(null, 'line ' + invocation.line + ': ' + procedure.name + ': no se esperaba el argumento ' + arg.name);
+              }
+            }
+            if (params_clone.length) {
+              this.deactive_params();
+              return resolved(null, 'line ' + invocation.line + ': ' + procedure.name + ': argumentos faltantes [' + params_clone.join(',') + ']');
+            }
+            _ref2 = procedure.view.params;
+            for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+              param_view = _ref2[_k];
+              param_view.setAttribute('title', this.scope[param_view.param_name]);
+              param_view.classList.add(ACTIVE);
+            }
             return context.set_current(context.BLOCK(procedure.statements, this));
           } else {
+            this.deactive_params();
             return context.set_current(parent);
           }
         },
@@ -99,6 +156,7 @@ interpreter = {};
     },
     CONDITIONAL: function(conditional, parent) {
       return {
+        scope: parent.scope,
         view: conditional.view,
         activate: function() {
           var promise;
@@ -108,6 +166,9 @@ interpreter = {};
             environment.examine(conditional.condition).success((function(_this) {
               return function(result) {
                 var defer;
+                if (conditional.negate) {
+                  result = !result;
+                }
                 if (result) {
                   return context.set_current(context.BLOCK(conditional.positive, _this)).success(function() {
                     return promise.resolve();
@@ -141,9 +202,10 @@ interpreter = {};
     },
     REPEAT: function(repeat, parent) {
       return {
+        scope: parent.scope,
         view: repeat.view,
         processed: 0,
-        amount: repeat.index.value,
+        amount: eval_exp(repeat.index, parent.scope),
         activate: function() {
           if (this.processed < this.amount) {
             this.processed += 1;
@@ -159,6 +221,7 @@ interpreter = {};
     },
     ACTION: function(action, parent) {
       return {
+        scope: parent.scope,
         activate: function() {
           var promise;
           promise = synck();

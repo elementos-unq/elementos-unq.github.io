@@ -40,6 +40,9 @@ coder = {};
       condition_row.appendChild(mk_span(mkindent(level)));
       condition_row.appendChild(mk_span('Si', ['conditional-if']));
       condition_row.appendChild(mk_span('(', ['semi-start']));
+      if (conditional.negate) {
+        condition_row.appendChild(mk_span('no ', ['negation']));
+      }
       condition_row.appendChild(mk_span(conditional.condition, ['condition']));
       condition_row.appendChild(mk_span(')', ['semi-end']));
       condition_row.appendChild(mk_span('Entonces', ['conditional-then']));
@@ -135,7 +138,8 @@ coder = {};
     return block;
   };
   mk_signature = function(procedure) {
-    var index, last, param, params, signature, _i, _len;
+    var index, last, param, param_text, params, signature, _i, _len;
+    procedure.view.params = [];
     signature = mk_div(['signature']);
     signature.appendChild(mk_span(mkindent(0) + procedure.name, ['name']));
     if (params = procedure.params) {
@@ -143,7 +147,10 @@ coder = {};
       last = params.length - 1;
       for (index = _i = 0, _len = params.length; _i < _len; index = ++_i) {
         param = params[index];
-        signature.appendChild(mk_span(param, ['param-name']));
+        param_text = mk_span(param, ['param-name']);
+        param_text.param_name = param;
+        procedure.view.params.push(param_text);
+        signature.appendChild(param_text);
         if (index < last) {
           signature.appendChild(mk_span(', '));
         }

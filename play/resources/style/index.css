@@ -206,18 +206,23 @@
 #iterator .controls .buttons {
   width: 200px;
 }
-#iterator.processing .controls .buttons .btn {
-  background-color: #7CDF80;
+#iterator .controls .buttons .btn .wating {
+  visibility: hidden;
+  display: none;
 }
-#iterator.stopped .controls .buttons .btn.run,
-#iterator.stopped .controls .buttons .btn.step {
-  background-color: #7CDF80;
-}
-#iterator.error .controls {
-  background-color: #FF4500;
-}
-#iterator.error .controls .buttons .btn {
-  background-color: #DC143C;
+#iterator #error {
+  height: 0;
+  float: left;
+  width: 200px;
+  position: relative;
+  top: 60vh;
+  left: 0;
+  background-color: red;
+  white-space: initial;
+  padding: 0px;
+  box-sizing: border-box;
+  color: white;
+  overflow: hidden;
 }
 #iterator #boardContainer {
   box-sizing: border-box;
@@ -225,6 +230,9 @@
   width: 100%;
   height: 85vh;
   background-color: #00CED1;
+}
+#iterator #boardContainer .board {
+  float: left;
 }
 #iterator #boardContainer .board .row {
   height: 30px;
@@ -254,14 +262,50 @@
 #iterator #boardContainer .board .row .cell.green .content {
   background-color: #4caf50;
 }
+#iterator.processing .controls .buttons .btn {
+  background-color: #7CDF80;
+}
+#iterator.show-processing .controls .buttons .btn .normal {
+  visibility: hidden;
+  display: none;
+}
+#iterator.show-processing .controls .buttons .btn .wating {
+  visibility: visible;
+  display: block;
+}
+#iterator.stopped .controls .buttons .btn.run,
+#iterator.stopped .controls .buttons .btn.step,
+#iterator.stopped .controls .buttons .btn.run-all {
+  background-color: #7CDF80;
+}
+#iterator.error .controls {
+  height: 60vh;
+  background-color: #FF4500;
+}
+#iterator.error .controls .buttons .btn {
+  background-color: #DC143C;
+}
+#iterator.error #error {
+  height: 25vh;
+  float: left;
+  width: 200px;
+  position: relative;
+  top: 60vh;
+  left: 0;
+  background-color: red;
+  white-space: initial;
+  padding: 5px;
+  box-sizing: border-box;
+  color: white;
+}
 
 .btn.flow-control {
-  width: 20px;
+  width: 23.5px;
 }
 
 .btn.resize {
   margin-top: 10px;
-  width: 140px;
+  width: 170px;
 }
 
 /* #### Mobile Phones Portrait #### */
@@ -278,7 +322,18 @@
     float: left;
     width: 100%;
     height: 40vh;
-    background-color: #008080;
+  }
+  #iterator.error .controls {
+    height: 50px;
+    overflow: hidden;
+  }
+  #iterator.error #error {
+    position: relative;
+    clear: left;
+    float: left;
+    width: 100%;
+    height: auto;
+    top: 0;
   }
   #iterator #boardContainer {
     position: relative;
@@ -287,7 +342,6 @@
     float: left;
     width: 100%;
     height: 45vh;
-    background-color: #00CED1;
   }
 }
 /* #### Mobile Phones Landscape #### */

@@ -134,8 +134,8 @@ environment = {};
   environment.view = board.view;
   board.resize(current);
   environment.resize = function(w, h) {
+    current.max_x = w - 1;
     current.max_y = h - 1;
-    current.max_x = h - 1;
     if (current.x > current.max_x) {
       current.x = current.max_x;
     }

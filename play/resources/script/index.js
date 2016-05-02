@@ -258,6 +258,7 @@ window.onload = function() {
     return window.setTimeout(callback, 1);
   };
   window.step = function() {
+    document.activeElement.blur();
     if (!(scope.processing || scope.error || (MODE.CURRENT !== MODE.ITERATE))) {
       scope.processing = true;
       return asynk(function() {
@@ -312,12 +313,14 @@ window.onload = function() {
     return interpreter.step().success(on_success).error(on_error);
   };
   window.run = function() {
+    document.activeElement.blur();
     if (!(scope.processing || scope.error)) {
       scope.processing = true;
       return makeloop();
     }
   };
   window.run_all = function() {
+    document.activeElement.blur();
     if (!(scope.processing || scope.error)) {
       scope.processing = true;
       scope.show_processing = true;
@@ -325,6 +328,7 @@ window.onload = function() {
     }
   };
   window.reset = function() {
+    document.activeElement.blur();
     if (!scope.processing) {
       scope.processing = true;
       scope.stopped = false;
@@ -336,10 +340,11 @@ window.onload = function() {
   };
   window.resize = function() {
     var h, h_val, w, w_val;
-    h_val = board_height.value;
+    document.activeElement.blur();
     w_val = board_width.value;
-    h = h_val && h_val > 0 ? h_val : 1;
+    h_val = board_height.value;
     w = w_val && w_val > 0 ? w_val : 1;
+    h = h_val && h_val > 0 ? h_val : 1;
     return environment.resize(w, h);
   };
   window.input_mode = function() {

@@ -2,6 +2,9 @@
   padding: 0px;
   margin: 0px;
 }
+.ast .procedure > .comment {
+  color: #0AA;
+}
 .ast .procedure > .signature > .name {
   font-weight: bold;
   color: #606;

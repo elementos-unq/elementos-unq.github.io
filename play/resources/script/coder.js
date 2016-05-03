@@ -4,7 +4,7 @@ coder = {};
 
 (function() {
   var add_classes, exp_nodes, fill_procedure, indent, mk_block, mk_div, mk_pre, mk_signature, mk_single, mk_span, mkindent, mkstatement;
-  indent = '    ';
+  indent = '  ';
   mkstatement = {
     INVOCATION: function(invocation, level) {
       var arg, arg_node, args, index, last, view, _i, _j, _len, _len1, _ref;
@@ -49,7 +49,7 @@ coder = {};
       view.appendChild(condition_row);
       view.appendChild(mk_block(conditional.positive, level));
       if (conditional.negative) {
-        view.appendChild(mk_single('Else', level, ['conditional-else']));
+        view.appendChild(mk_single('Sino', level, ['conditional-else']));
         view.appendChild(mk_block(conditional.negative, level));
       }
       return view;
@@ -161,15 +161,20 @@ coder = {};
     return signature;
   };
   fill_procedure = function(procedure) {
-    var view;
+    var comment, view, _i, _len, _ref;
     view = procedure.view = mk_div(['procedure']);
+    _ref = procedure.comments || [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      comment = _ref[_i];
+      view.appendChild(mk_single(comment, 0, ['comment']));
+    }
     view.appendChild(mk_signature(procedure));
     return view.appendChild(mk_block(procedure.statements, 0));
   };
   mkindent = function(level) {
     var space;
     level = level > 0 ? level : 0;
-    space = ' ';
+    space = '';
     while (level--) {
       space += indent;
     }
@@ -182,7 +187,7 @@ coder = {};
       procedure = ast[_i];
       fill_procedure(procedure);
       main.appendChild(procedure.view);
-      main.appendChild(mk_single('', 0));
+      main.appendChild(mk_single(' ', 0));
     }
     return ast.view = main;
   };

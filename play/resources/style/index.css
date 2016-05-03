@@ -235,18 +235,18 @@
   float: left;
 }
 #iterator #boardContainer .board .row {
-  height: 30px;
+  height: 16px;
   float: left;
   clear: left;
 }
 #iterator #boardContainer .board .row .cell {
   box-sizing: content-box;
-  padding: 4px;
+  padding: 2px;
   float: left;
 }
 #iterator #boardContainer .board .row .cell .content {
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   background-color: #FFFFFF;
   border: 1px solid black;
 }

@@ -95,6 +95,10 @@ environment = {};
       };
     }
   };
+  actions.Arriba = actions.MoverNorte;
+  actions.Abajo = actions.MoverSur;
+  actions.Derecha = actions.MoverEste;
+  actions.Izquierda = actions.MoverOeste;
   conditions = {
     estaPintado: function() {
       return board.estaPintado();

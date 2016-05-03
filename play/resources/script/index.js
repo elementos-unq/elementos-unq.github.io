@@ -11,7 +11,7 @@ save_code = function() {};
 fill_code = function() {};
 
 window.onload = function() {
-  var MODE, action_text, allow_execute_change, ast, asynk, boardContainer, board_height, board_width, countdown, error_change, error_text, execcode, fix_body_css, handle_key, input, iterator, makeloop, makeloop_synk, output, pretty, processing_change, reset_count_down, scope, second_pass, show_error, show_processing_change, stopped_change, storage_key, swap_state, time_left_change, timeout_text, vh_support;
+  var MODE, action_text, allow_execute_change, ast, asynk, boardContainer, board_height, board_width, countdown, error_change, error_text, execcode, fix_body_css, handle_key, input, iterator, local_step, makeloop, makeloop_synk, output, pretty, processing_change, reset_count_down, scope, second_pass, show_error, show_processing_change, stopped_change, storage_key, swap_state, time_left_change, timeout_text, vh_support;
   input = document.querySelector('#codeInput');
   output = document.querySelector('#codeOutput');
   pretty = document.querySelector('#codePreety');
@@ -259,6 +259,9 @@ window.onload = function() {
   };
   window.step = function() {
     document.activeElement.blur();
+    return local_step();
+  };
+  local_step = function() {
     if (!(scope.processing || scope.error || (MODE.CURRENT !== MODE.ITERATE))) {
       scope.processing = true;
       return asynk(function() {
@@ -329,7 +332,7 @@ window.onload = function() {
   };
   window.reset = function() {
     document.activeElement.blur();
-    if (!scope.processing) {
+    if (!(scope.processing || (MODE.CURRENT !== MODE.ITERATE))) {
       scope.processing = true;
       scope.stopped = false;
       scope.error = false;
@@ -361,7 +364,7 @@ window.onload = function() {
     var keyCode;
     keyCode = evnt.keyCode;
     if (keyCode === 13) {
-      window.step();
+      local_step();
     }
     if (keyCode === 37) {
       environment.left();

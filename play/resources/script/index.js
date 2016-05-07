@@ -11,7 +11,7 @@ save_code = function() {};
 fill_code = function() {};
 
 window.onload = function() {
-  var MODE, action_text, allow_execute_change, ast, asynk, boardContainer, board_height, board_width, countdown, error_change, error_text, execcode, fix_body_css, handle_key, input, iterator, local_step, makeloop, makeloop_synk, output, pretty, processing_change, reset_count_down, scope, second_pass, show_error, show_processing_change, stopped_change, storage_key, swap_state, time_left_change, timeout_text, vh_support;
+  var MODE, action_text, allow_execute_change, ast, asynk, boardContainer, board_height, board_width, countdown, error_change, error_text, execcode, fix_body_css, handle_key, input, iterator, local_step, makeloop, makeloop_synk, output, pretty, processing_change, reset_count_down, scope, second_pass, show_error, show_processing_change, stopped_change, storage_key, swap_state, synk, time_left_change, timeout_text, vh_support;
   input = document.querySelector('#codeInput');
   output = document.querySelector('#codeOutput');
   pretty = document.querySelector('#codePreety');
@@ -257,6 +257,9 @@ window.onload = function() {
   asynk = function(callback) {
     return window.setTimeout(callback, 1);
   };
+  synk = function(callback) {
+    return callback();
+  };
   window.step = function() {
     document.activeElement.blur();
     return local_step();
@@ -298,20 +301,30 @@ window.onload = function() {
     });
   };
   makeloop_synk = function() {
-    var on_error, on_success;
-    on_error = function() {
+    var on_error, on_success, stack_safe_counter;
+    stack_safe_counter = 0;
+    on_error = function(error) {
       scope.processing = false;
       scope.show_processing = false;
       return show_error(error);
     };
     on_success = function(end) {
-      if (end) {
-        scope.processing = false;
-        scope.show_processing = false;
-        return scope.stopped = true;
-      } else {
-        return interpreter.step().success(on_success).error(on_error);
+      var caller_next;
+      stack_safe_counter += 1;
+      caller_next = synk;
+      if (stack_safe_counter > 5000) {
+        stack_safe_counter = 0;
+        caller_next = asynk;
       }
+      return caller_next(function() {
+        if (end) {
+          scope.processing = false;
+          scope.show_processing = false;
+          return scope.stopped = true;
+        } else {
+          return interpreter.step().success(on_success).error(on_error);
+        }
+      });
     };
     return interpreter.step().success(on_success).error(on_error);
   };
@@ -379,6 +392,5 @@ window.onload = function() {
       return environment.down();
     }
   };
-  document.addEventListener('keydown', handle_key, false);
   return reset_count_down();
 };

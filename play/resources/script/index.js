@@ -137,7 +137,7 @@ window.onload = function() {
         }
       }
     });
-    WAIT_TIME = 3;
+    WAIT_TIME = 1;
     time_left = WAIT_TIME;
     allow_execute = false;
     Object.defineProperty(scope, 'time_left', {
@@ -376,9 +376,11 @@ window.onload = function() {
   handle_key = function(evnt) {
     var keyCode;
     keyCode = evnt.keyCode;
-    if (keyCode === 13) {
-      local_step();
-    }
+
+    /*
+    if keyCode is 13
+      local_step()
+     */
     if (keyCode === 37) {
       environment.left();
     }
@@ -392,5 +394,7 @@ window.onload = function() {
       return environment.down();
     }
   };
-  return reset_count_down();
+  document.addEventListener('keydown', handle_key, false);
+  reset_count_down();
+  return window.resize();
 };

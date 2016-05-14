@@ -224,42 +224,49 @@
   color: white;
   overflow: hidden;
 }
-#iterator #boardContainer {
+#iterator .scroll-wrapper {
   box-sizing: border-box;
   padding-left: 200px;
   width: 100%;
   height: 85vh;
   background-color: #00CED1;
 }
-#iterator #boardContainer .board {
+#iterator .scroll-wrapper #boardContainer {
+  overflow: auto;
+  box-sizing: content-box;
+  width: 100%;
+  height: 85vh;
+}
+#iterator .scroll-wrapper #boardContainer .board {
   float: left;
 }
-#iterator #boardContainer .board .row {
+#iterator .scroll-wrapper #boardContainer .board .row {
   height: 16px;
   float: left;
   clear: left;
+  display: inline-flex;
 }
-#iterator #boardContainer .board .row .cell {
+#iterator .scroll-wrapper #boardContainer .board .row .cell {
   box-sizing: content-box;
   padding: 2px;
   float: left;
 }
-#iterator #boardContainer .board .row .cell .content {
+#iterator .scroll-wrapper #boardContainer .board .row .cell .content {
   width: 10px;
   height: 10px;
   background-color: #FFFFFF;
   border: 1px solid black;
 }
-#iterator #boardContainer .board .row .cell.current {
+#iterator .scroll-wrapper #boardContainer .board .row .cell.current {
   background-color: #3333FF;
 }
-#iterator #boardContainer .board .row .cell.black .content {
+#iterator .scroll-wrapper #boardContainer .board .row .cell.black .content {
   background-color: #000000;
 }
-#iterator #boardContainer .board .row .cell.red .content {
+#iterator .scroll-wrapper #boardContainer .board .row .cell.red .content {
   background-color: #f44336;
 }
-#iterator #boardContainer .board .row .cell.green .content {
+#iterator .scroll-wrapper #boardContainer .board .row .cell.green .content {
   background-color: #4caf50;
 }
 #iterator.processing .controls .buttons .btn {

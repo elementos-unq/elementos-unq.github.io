@@ -58,11 +58,11 @@
             </button>
             <div class="input-wrapper">
               <span class="input-label">Celdas por fila</span>
-              <input id="boardWidth"/>
+              <input id="boardWidth" value="20"/>
             </div>
             <div class="input-wrapper">
               <span class="input-label">Cantidad de filas</span>
-              <input id="boardHeight"/>
+              <input id="boardHeight" value="20"/>
             </div>
             <button type="button" class="btn resize" onclick="resize()">
               <span><i class="fa fa-crop"></i> Redimensionar</span>
@@ -71,7 +71,9 @@
         </div>
         <div id="error">
         </div>
-        <div id="boardContainer">
+        <div class="scroll-wrapper">
+          <div id="boardContainer">
+          </div>
         </div>
       </div>
     </div>

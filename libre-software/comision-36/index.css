@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #2856b6;
+}
+
+.header {
+  background-color: #3e464c;
+  float: left;
+  width: 100%;
+  height: 10vh;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.header .left {
+  float: left;
+}
+.header .left .label {
+  box-sizing: initial;
+  color: #7986cb;
+}
+.header .left .label .name {
+  color: #FFF;
+}
+.header .right {
+  float: right;
+}
+
+.info {
+  width: 48.5%;
+  display: block;
+  text-decoration: none;
+  padding: 0;
+  margin: 1% 0 0 1%;
+  text-align: center;
+  color: #FFF;
+  transition: all 200ms ease;
+  background-color: #2866C6;
+  float:left;
+  position: relative;
+  min-height: 110px;
+}
+
+.info:hover {
+  transform: scale(1.01, 1.02);
+  cursor: pointer;
+  background-color: #3876D6;
+}
+
+.info .right{
+  width: 100%;
+  padding-left: 115px;
+  padding-top: 5px;
+  box-sizing: border-box;  
+}
+
+.info .preview{
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 5px;
+  top: 5px;
+}
+
+.info .title{
+  float: left;
+  width: 100%;
+  text-align: left;
+  line-height: 20px; 
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.info .members{
+  float:left;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.members .member{
+  float: left;
+  clear: left;
+  line-height: 20px;  
+  font-family: monospace;
+  color: #68D6FF;
+}
+
+
+

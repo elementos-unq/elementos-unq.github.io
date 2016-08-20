@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link  href="resources/style/general.css"     type="text/css" rel="stylesheet">
+    <link  href="resources/style/help.css"     type="text/css" rel="stylesheet">
+    <link  href="bower_components/components-font-awesome/css/font-awesome.css" type="text/css" rel="stylesheet">
+    <title>Validador Elementos</title>
+  </head>
+  <body>
+    <div class="header">
+      <span class="label">Elementos de programación y lógica<br/><span class="name">Validador derivación: Ayuda</span></span>
+      <a class="home-button" href="index.html">Validador</a>
+    </div>    
+    <div class="help-container">
+      <div class="help">
+        
+        
+        <h3>Comprobación de derivaciónes</h3>
+        <p>
+          El validador de derivaciones permite asegurar 
+          el uso correcto de reglas de derivación.
+        <br/>
+          Para utilizarlo se deberá ingresar en el cuadro 
+          de entrada un ejemplo de derivación 
+          en texto plano. como por ejemplo
+        </p>
+        <pre>
+ 1. q → r premisa
+ 2. (t V u) → q premisa
+ 3. ¬s → ¬¬q premisa
+ 4. (t V ¬s) supuesto
+ 5. ¬s supuesto
+ 6. ¬¬q E→(3,5)
+ 7. q ¬¬(6)
+<<
+ 8. ¬s → q I→(5-7)
+ 9. t supuesto
+10. (t V u) IV(9)
+11. q E→(2,10)
+<<
+12. t → q I→(9-11)
+13. q EV(4,8,12)
+14. r E→(1,13)
+<<
+15. (t V ¬s) → r I→(4-14)
+        </pre>
+        <p>
+          Y hacer click en el boton "comprobar"
+        </p>
+        <img class="asssert" src="assets/help/comprobar.png" />
+        <p>
+          para ver el siguiente resultado
+        </p>
+        <img src="assets/help/parsed.png" />
+        <p>
+          Para volver al modo de edición basta con hacer
+          click en el area de entrada.
+        </p>
+        <h3>Botones de ayuda</h3>
+        <p>
+          La aplicación provee un conjunto de botones de
+          ayuda para ingresar símbolos que no se encuentran
+          en el teclado físico.
+        </p>
+        <img src="assets/help/help-buttons.png" />
+        <h3>Detección de errores</h3>
+        <p>
+          En caso de encontrar errores, la aplicación los remarcará,
+          para que el usuario pueda .
+        </p>
+        <img src="assets/help/error.png" />
+      </div>
+    </div>
+  </body>
+</html>

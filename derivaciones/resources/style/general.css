@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #2856b6;
+}
+
+.header {
+  background-color: #3e464c;
+  float: left;
+  width: 100%;
+  height: 10vh;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.header .label {
+  box-sizing: initial;
+  color: #7986cb;
+}
+.header .label .name {
+  color: #FFF;
+}
+
+.btn {
+  box-sizing: content-box;
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
+  color: #FFFFFF;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px 0px 5px 5px;
+  display: block;
+  float: left;
+}
+.btn:focus {
+  outline: none;
+}
+
+.input-wrapper {
+  padding: 5px;
+}
+.input-wrapper > .input-label {
+  display: block;
+  float: left;
+  color: #FFFFFF;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.input-wrapper > input {
+  float: left;
+  clear: left;
+}
+
+/* #### Mobile Phones Portrait #### */
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-device-width: 640px) and (orientation: landscape) {
+  .header {
+    padding-top: 0px;
+  }
+  .header .label {
+    font-size: 8px;
+  }
+  .header .label .name {
+    font-size: 8px;
+  }
+}
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-device-width: 640px) {
+  /* some CSS here */
+}

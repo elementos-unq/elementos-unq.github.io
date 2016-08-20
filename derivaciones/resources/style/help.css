@@ -1,0 +1,33 @@
+.help-container {
+  padding: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  clear: both;
+}
+.help-container .help {
+  overflow: auto;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #FFF;
+  height: 85vh;
+  padding: 10px;
+}
+.help-container .help img.asssert {
+  width: 200px;
+}
+
+.home-button {
+  float: right;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.5s;
+  padding: 5px 10px;
+  width: 60px;
+  margin-top: -15px;
+}

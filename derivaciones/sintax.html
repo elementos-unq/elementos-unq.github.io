@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <script src="resources/script/elementos.js" type="text/javascript"></script>
+    <script src="resources/script/sintax.js"    type="text/javascript"></script>
+    <link  href="resources/style/general.css"   type="text/css" rel="stylesheet">
+    <link  href="resources/style/sintax.css"    type="text/css" rel="stylesheet">
+    <title>Analizador sintáctico</title>
+  </head>
+  <body>
+    <div class="header">
+      <span class="label">Elementos de programación y lógica<br/><span class="name">Validador derivación</span></span>
+    
+    </div>
+    <div class="code-input">
+      <button type="button" id="checkCode" onclick="check_code()">
+        <span>Comprobar </span>
+      </button>
+      
+      <div class="key-helpers">
+        <button type="button" class="key-helper" onclick="write_char('Λ')">
+          <span>Λ</span>
+        </button>
+        <button type="button" class="key-helper" onclick="write_char('→')">
+          <span class="bold">→</span>
+        </button>
+        <button type="button" class="key-helper" onclick="write_char('↔')">
+          <span class="bold">↔</span>
+        </button>
+      </div>
+      
+      <textarea id="codeInput" onkeyup="save_code()"></textarea>
+    </div>
+    <div class="code-output">
+      <textarea id="codeOutput"></textarea>
+    </div>
+  </body>
+</html>

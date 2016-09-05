@@ -3,7 +3,7 @@ var validator;
 validator = {};
 
 (function() {
-  var BINARY, CONDITIONAL, CONJUNCTION, CONTRADICTION, DISJUNCTION, ITERATION, NEGATION, REF, assertion, clean, compare, elimination, equals, error, exist, exp_string, extract, get_node, get_refs, introduction, match_references, print, processors;
+  var ASSERTION, BINARY, CONDITIONAL, CONJUNCTION, CONTRADICTION, DISJUNCTION, ITERATION, NEGATION, REF, assertion, clean, compare, elimination, equals, error, exist, exp_string, extract, get_node, get_refs, introduction, match_references, print, processors;
   error = {
     reference_later: function(ast) {
       ast.error = true;
@@ -173,6 +173,22 @@ validator = {};
         content: ['Eliminar la doble', 'negación en', print(first_ref), 'produce', print(second_nested)]
       });
     },
+    repeat_unique_reference: function(ast) {
+      ast.error = true;
+      return ast.current.children.push({
+        type: 'ERROR',
+        error_key: 'REPEAT_ERROR',
+        content: ['La repetición espera', 'una única referencia']
+      });
+    },
+    repeat_reference: function(ast) {
+      ast.error = true;
+      return ast.current.children.push({
+        type: 'ERROR',
+        error_key: 'REPEAT_ERROR',
+        content: ['La repetición espera', 'una referencia a un', 'elemento equivalente']
+      });
+    },
     efsq_unique_reference: function(ast) {
       ast.error = true;
       return ast.current.children.push({
@@ -188,9 +204,30 @@ validator = {};
         error_key: 'EFSQ_ERROR',
         content: ['EFSQ espera una contradicción', 'como referencia']
       });
+    },
+    unexpected_close_iteration: function(ast) {
+      ast.error = true;
+      ast.current.children.push({
+        type: 'CLOSE_ITERATION_ERROR'
+      });
+      return ast.current.children.push({
+        type: 'ERROR',
+        error_key: 'ITERATION_CLOSE_ERROR',
+        content: ['Para cerrar una iteracion con <<', 'se debe partir de un supuesto']
+      });
+    },
+    unexpected_after_iteration: function(ast, parsed) {
+      ast.error = true;
+      ast.current.children.push(parsed);
+      return ast.current.children.push({
+        type: 'ERROR',
+        error_key: 'ITERATION_CONCLUSION_ERROR',
+        content: ['Luego de una iteración', 'se espera una introducción', 'de condicional o una', 'intruducción de negación']
+      });
     }
   };
   BINARY = 'BINARY';
+  ASSERTION = 'ASSERTION';
   ITERATION = 'ITERATION';
   DISJUNCTION = 'DISJUNCTION';
   CONJUNCTION = 'CONJUNCTION';
@@ -579,6 +616,23 @@ validator = {};
       }
       return parsed.ok = true;
     },
+    REPEAT: function(ast, parsed) {
+      var expression, previous, references, unique_ref;
+      expression = extract(parsed.expression);
+      references = parsed.rule.references;
+      previous = get_refs[references.type](ast, references, parsed.index);
+      if (ast.error) {
+        return;
+      }
+      if (previous.length !== 1) {
+        return error.repeat_unique_reference(ast);
+      }
+      unique_ref = extract(previous[0].expression);
+      if (!equals(unique_ref, expression)) {
+        return error.repeat_reference(ast);
+      }
+      return parsed.ok = true;
+    },
     E: function(ast, parsed) {
       return elimination[parsed.rule.connector.type](ast, parsed);
     },
@@ -589,13 +643,22 @@ validator = {};
   processors = {
     PREMISE: {
       process: function(ast, parsed) {
-        return ast.current.children.push(parsed);
+        ast.current.children.push(parsed);
+        parsed.ok = true;
+        return ast.indices.push({
+          index: parsed.index,
+          klass: 'premise'
+        });
       }
     },
     ASSERTION: {
       process: function(ast, parsed) {
         ast.current.children.push(parsed);
-        return assertion[parsed.rule.action](ast, parsed);
+        assertion[parsed.rule.action](ast, parsed);
+        return ast.indices.push({
+          index: parsed.index,
+          klass: parsed.iteration ? 'supposed-end' : 'assertion'
+        });
       }
     },
     SUPPOSED: {
@@ -608,26 +671,25 @@ validator = {};
         };
         ast.current.children.push(node);
         ast.current = node;
-        return node.children.push(parsed);
+        parsed.ok = true;
+        node.children.push(parsed);
+        return ast.indices.push({
+          index: parsed.index,
+          klass: 'supposed'
+        });
       }
     },
     SUPPOSED_END: {
       process: function(ast, parsed) {
         if (ast.current.type !== ITERATION) {
-          ast.error = true;
-          ast.current.children.push({
-            type: 'CLOSE_ITERATION_ERROR'
-          });
-          ast.current.children.push({
-            type: 'ERROR',
-            error_key: 'ITERATION_CLOSE_ERROR',
-            content: ['Para cerrar una iteracion con <<', 'se debe partir de un supuesto']
-          });
-          return;
+          return error.unexpected_close_iteration(ast);
         }
         parsed.iteration = ast.current;
         ast.current = ast.current.parent;
         ast.supposed_end = false;
+        if (parsed.type !== ASSERTION) {
+          return error.unexpected_after_iteration(ast, parsed);
+        }
         return processors.ASSERTION.process(ast, parsed);
       }
     }
@@ -654,7 +716,8 @@ validator = {};
         type: 'ROOT',
         children: []
       },
-      index: 1
+      index: 1,
+      indices: []
     };
     ast.current = ast.root;
     for (_i = 0, _len = lines.length; _i < _len; _i++) {
@@ -665,9 +728,6 @@ validator = {};
       if (/^(\s)*\*\*/.test(line)) {
         continue;
       }
-      try {
-
-      } catch (_error) {}
       if (/^((\s)*\|)*((\s)*\-)*((\s)*\|)*(\s)*$/.test(line)) {
         continue;
       }
@@ -688,10 +748,13 @@ validator = {};
           ast.error = true;
           parent = ast.current.parent || ast.current;
           parent.children.push({
+            type: 'CLOSE_ITERATION_ERROR'
+          });
+          parent.children.push({
             type: 'ERROR',
             error_key: 'SUPPOSED_ERROR',
             parsed: parsed,
-            content: ['<<', 'No se pueden realizar', 'dos cierres de contextos', 'de suposición consecutivos']
+            content: ['No se pueden realizar', 'dos cierres de contextos', 'de suposición consecutivos']
           });
           return clean(ast);
         } else {

@@ -26,23 +26,33 @@
   float: left;
   clear: left;
 }
+.root .index-container .index.supposed {
+  margin-top: 11px;
+}
+.root .index-container .index.supposed-end {
+  margin-top: 11px;
+}
 .root .index-container.index-container-2 .index {
   min-width: 15px;
 }
-.root .assertion {
+.root .premise > *,
+.root .supposed > *,
+.root .assertion > *,
+.root .iteration-close > * {
   float: left;
-  clear: left;
 }
-.root .assertion > * {
+.root .state-error,
+.root .state-not-ok {
   float: left;
-}
-.root .assertion .state-error,
-.root .assertion .state-not-ok {
   width: 13px;
   height: 13px;
   display: block;
   margin-top: 1px;
   margin-left: 5px;
+}
+.root .assertion {
+  float: left;
+  clear: left;
 }
 .root .premise, .root .supposed {
   float: left;
@@ -69,11 +79,12 @@
 .root .iteration {
   box-sizing: border-box;
   border: 1px solid #0BB;
-  padding-left: 2px;
+  padding-left: 5px;
   padding-right: 5px;
-  padding-bottom: 1px;
-  margin-top: -1px;
-  margin-bottom: -2px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   float: left;
   clear: left;
 }
@@ -90,7 +101,9 @@
   margin-left: 5px;
 }
 .root .iteration-close {
-  display: inline;
+  clear: left;
+  display: inline-block;
+  float: left;
 }
 .root .binary {
   display: inline;

@@ -13,7 +13,7 @@ fill_code = function() {};
 write_char = function() {};
 
 window.onload = function() {
-  var MODE, action_text, allow_execute_change, ast, countdown, execcode, fix_body_css, input, pretty, reset_count_down, scope, second_pass, storage_key, swap_state, time_left_change, timeout_text, vh_support;
+  var MODE, action_text, allow_execute_change, ast, countdown, execcode, fix_body_css, handle_key, input, pretty, reset_count_down, scope, second_pass, storage_key, swap_state, time_left_change, timeout_text, vh_support;
   input = document.querySelector('#codeInput');
   pretty = document.querySelector('#codePreety');
   execcode = document.querySelector('#execCode');
@@ -332,21 +332,36 @@ window.onload = function() {
       return swap_state(MODE.PRETTY);
     }
   };
+  handle_key = function(evnt) {
+    var keyCode, process;
+    if (!evnt.ctrlKey) {
+      return true;
+    }
+    keyCode = evnt.keyCode;
+    if (keyCode === 69) {
+      process = true;
+      write_char('→');
+    }
+    if (keyCode === 82) {
+      process = true;
+      write_char('⊥');
+    }
+    if (keyCode === 68) {
+      process = true;
+      write_char('V');
+    }
+    if (keyCode === 70) {
+      process = true;
+      write_char('Λ');
+    }
+    if (process) {
+      evnt.preventDefault();
+      return false;
+    }
+  };
+  document.addEventListener('keydown', handle_key, false);
 
   /*  
-  handle_key = (evnt)->
-    keyCode = evnt.keyCode;
-    if keyCode is 13
-      local_step()
-    if keyCode is 37
-      environment.left()
-    if keyCode is 39
-      environment.right()
-    if keyCode is 38
-      environment.up()
-    if keyCode is 40
-      environment.down()    
-  document.addEventListener 'keydown', handle_key, false  
   window.resize()
    */
   return reset_count_down();

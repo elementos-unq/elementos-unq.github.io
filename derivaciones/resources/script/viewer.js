@@ -3,7 +3,16 @@ var viewer;
 viewer = {};
 
 (function() {
-  var add_classes, mk, mk_div, mk_expression, mk_img, mk_index, mk_pre, mk_ref, mk_rule, mk_single, mk_span, process_children, process_expression;
+  var add_classes, mk, mk_div, mk_expression, mk_img, mk_index, mk_pre, mk_ref, mk_rule, mk_single, mk_span, process_children, process_errors, process_expression;
+  process_errors = function(node, error) {
+    if (!node.ok) {
+      if (error) {
+        return node.view.appendChild(mk_img(['state-error'], 'assets/error.png'));
+      } else {
+        return node.view.appendChild(mk_img(['state-not-ok'], 'assets/warning.png'));
+      }
+    }
+  };
   mk_expression = {
     BINARY: function(expression) {
       var root;
@@ -38,30 +47,27 @@ viewer = {};
   mk = {
     CLOSE_ITERATION_ERROR: function(node) {
       node.view = mk_div(['iteration-close']);
-      return node.view.appendChild(mk_span('<<', ['iteration-close-text']));
+      node.view.appendChild(mk_span('<<', ['iteration-close-text']));
+      return process_errors(node, true);
     },
-    PREMISE: function(node) {
+    PREMISE: function(node, error) {
       node.view = mk_div(['premise']);
       node.view.appendChild(process_expression(node.expression));
-      return node.view.appendChild(mk_span('premisa', ['premise-text']));
+      node.view.appendChild(mk_span('premisa', ['premise-text']));
+      return process_errors(node, error);
     },
-    SUPPOSED: function(node) {
+    SUPPOSED: function(node, error) {
       node.view = mk_div(['supposed']);
       node.view.appendChild(process_expression(node.expression));
-      return node.view.appendChild(mk_span('supuesto', ['supposed-text']));
+      node.view.appendChild(mk_span('supuesto', ['supposed-text']));
+      return process_errors(node, error);
     },
     ASSERTION: function(node, error) {
       node.view = mk_div(['assertion']);
       node.view.appendChild(process_expression(node.expression));
       mk_rule(node.rule);
       node.view.appendChild(node.rule.view);
-      if (!node.ok) {
-        if (error) {
-          return node.view.appendChild(mk_img(['state-error'], 'assets/error.png'));
-        } else {
-          return node.view.appendChild(mk_img(['state-not-ok'], 'assets/warning.png'));
-        }
-      }
+      return process_errors(node, error);
     },
     ITERATION: function(node, error) {
       node.view = mk_div(['iteration']);
@@ -87,6 +93,8 @@ viewer = {};
       rule.view.appendChild(mk_span('¬¬', ['rule-type']));
     } else if (rule.action === 'EFSQ') {
       rule.view.appendChild(mk_span('EFSQ', ['rule-type']));
+    } else if (rule.action === 'REPEAT') {
+      rule.view.appendChild(mk_span('R', ['rule-type']));
     } else {
       rule.view.appendChild(mk_span(rule.action, ['rule-type']));
       rule.view.appendChild(mk_span(rule.connector.content, ['rule-connector']));
@@ -125,13 +133,15 @@ viewer = {};
     return _results;
   };
   mk_index = function(ast) {
-    var index, rules, width_klass, _i, _ref, _results;
+    var elem, rules, width_klass, _i, _len, _ref, _results;
     width_klass = 'index-container-' + ast.length.toString().length;
     rules = mk_div(['index-container', width_klass]);
     ast.root.view.appendChild(rules);
+    _ref = ast.indices;
     _results = [];
-    for (index = _i = 1, _ref = ast.length; 1 <= _ref ? _i <= _ref : _i >= _ref; index = 1 <= _ref ? ++_i : --_i) {
-      _results.push(rules.appendChild(mk_span(index, ['index'])));
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      elem = _ref[_i];
+      _results.push(rules.appendChild(mk_span(elem.index, ['index', elem.klass])));
     }
     return _results;
   };
